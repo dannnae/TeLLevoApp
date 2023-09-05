@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+<img src="assets/icon/duoc.png">
+
+<ion-content>
+  <ion-text color="light">
+    <h1>Bienvenido!</h1>
+  </ion-text>
+  <form (ngSubmit)="login()">
+
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="nombre" [(ngModel)]="nombre" name="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+    </ion-item>
+    
+    <a [routerLink]="['/password']" class="small-text">Recordar contraseña</a>
+    <div class="error-message" *ngIf="password && password.length < 4">La contraseña debe tener al menos 4 caracteres</div>
+      <ion-button type="submit" expand="block" [routerLink]="['/home']">Inicar sesión</ion-button>
+  </form>
+
+  
+</ion-content>
+
+

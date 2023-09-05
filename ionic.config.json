@@ -1,0 +1,7 @@
+{
+  "name": "Duocber",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
