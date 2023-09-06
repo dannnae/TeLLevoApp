@@ -1,13 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Iniciar sesión</ion-title>
+    <ion-title>
+      TeLlevoApp
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 <img src="assets/icon/duoc.png">
 
 <ion-content>
   <ion-text color="light">
+    <div class="center-text">
     <h1>Bienvenido!</h1>
+    <ion-icon name="heart" aria-hidden="true"></ion-icon>
+  </div>
+    
   </ion-text>
   <form (ngSubmit)="login()">
 
@@ -21,12 +27,19 @@
       <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
     </ion-item>
     
-    <a [routerLink]="['/password']" class="small-text">Recordar contraseña</a>
+    
     <div class="error-message" *ngIf="password && password.length < 4">La contraseña debe tener al menos 4 caracteres</div>
       <ion-button type="submit" expand="block" [routerLink]="['/home']">Inicar sesión</ion-button>
+      <div style="height: 40px;"></div>
+        <div class="center-text">
+      <a [routerLink]="['/password']" class="small-text">Recordar contraseña</a>
+    </div>
   </form>
 
   
 </ion-content>
+
+
+
 
 
