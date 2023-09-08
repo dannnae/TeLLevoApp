@@ -29,6 +29,7 @@
     
     
     <div class="error-message" *ngIf="password && password.length < 4">La contraseña debe tener al menos 4 caracteres</div>
+    <div class="error-message" *ngIf="nombre && nombre.length < 4">El nombre debe tener al menos 4 caracteres</div>
       <ion-button type="submit" expand="block" [routerLink]="['/home']">Inicar sesión</ion-button>
       <div style="height: 40px;"></div>
         <div class="center-text">
