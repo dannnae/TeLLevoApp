@@ -21,8 +21,7 @@ export class LoginPage {
       return;
     }
     this.router.navigate(['/home'], { queryParams: { nombre: this.nombre } });
-  }
-
+  }  
 }
 
 
