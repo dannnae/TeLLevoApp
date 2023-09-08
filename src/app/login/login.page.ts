@@ -16,12 +16,13 @@ export class LoginPage {
   }
 
   login() {
-    if (this.password.length < 4) {
+    if (this.password.length && this.nombre.length< 4) {
       console.log('La contraseña debe tener al menos 4 caracteres');
       return;
     }
     this.router.navigate(['/home'], { queryParams: { nombre: this.nombre } });
   }  
+  
 }
 
 
