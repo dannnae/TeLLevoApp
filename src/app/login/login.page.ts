@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +9,24 @@ import { Router } from '@angular/router';
 export class LoginPage {
   nombre!: string;
   password!: string;
-  router!: Router;
-
-  constructor(_router: Router) {
-    this.router = _router;
-  }
+  
+  constructor(private router: Router) { }
 
   login() {
     if (this.password.length && this.nombre.length< 4) {
       console.log('La contraseña debe tener al menos 4 caracteres');
       return;
     }
-    this.router.navigate(['/home'], { queryParams: { nombre: this.nombre } });
-  }  
+    
+    const navigationExtras: NavigationExtras = {
+      state: {
+        nombre: this.nombre
+      }
+    };
+    console.log(this.nombre)
+    this.router.navigate(['/home'], navigationExtras);
   
+  }
 }
 
 
