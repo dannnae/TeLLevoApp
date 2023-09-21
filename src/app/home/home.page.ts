@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-
 export class HomePage implements OnInit {
-  nombre: string = '';
+  user: any = {}; // Declarar una variable para almacenar los datos del usuario
+  
 
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-
-  }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.nombre = params['nombre'];
-    });
+    const userData = this.router.getCurrentNavigation()?.extras.state;
+  
+    if (userData) {
+      this.user = {...userData };
+      console.log(this.user)
+    }
   }
   
 }
