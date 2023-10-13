@@ -24,13 +24,16 @@
   <ion-card-content>
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <mat-label>Punto de partida</mat-label>
+      
+        <mat-label><mat-icon> my_location </mat-icon> Punto de partida</mat-label>
         <input matInput placeholder="" value="">
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-label>Destino</mat-label>
+        <mat-label><mat-icon> near_me</mat-icon> Destino</mat-label>
         <input matInput placeholder="" value="">
       </mat-form-field>
+
+      
       <ion-button type="submit" expand="block" [routerLink]="['/home']">Buscar</ion-button>
     </form>
   </ion-card-content>
