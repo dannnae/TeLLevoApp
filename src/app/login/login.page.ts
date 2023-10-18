@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { DjangoService } from '../services/django.service';
 
 @Component({
   selector: 'app-login',
@@ -10,22 +11,23 @@ export class LoginPage {
   nombre!: string;
   password!: string;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private djangoApi: DjangoService) { }
 
   login() {
     if (this.password.length && this.nombre.length< 4) {
-      console.log('La contraseña debe tener al menos 4 caracteres');
       return;
     }
-    
-    const navigationExtras: NavigationExtras = {
-      state: {
-        nombre: this.nombre
+
+    this.djangoApi.login(this.nombre, this.password).subscribe(
+      (response: any[]) => {
+        const navigationExtras: NavigationExtras = {
+          state: {
+            nombre: this.nombre
+          }
+        };
+        this.router.navigate(['/home'], navigationExtras);
       }
-    };
-    console.log(this.nombre)
-    this.router.navigate(['/home'], navigationExtras);
-  
+    );
   }
 }
 
