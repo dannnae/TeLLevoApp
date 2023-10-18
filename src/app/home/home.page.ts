@@ -19,7 +19,6 @@ export class HomePage implements OnInit {
   
     if (userData) {
       this.user = {...userData };
-      console.log(this.user)
     }
   }
   
