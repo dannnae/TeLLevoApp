@@ -16,6 +16,5 @@ export class PasswordPage implements OnInit {
   }
 
   guardar() {
-    let message = `Nombre: ${this.nombre} ${this.password1} ${this.password2}`;
   }
 }
