@@ -19,13 +19,19 @@ export class LoginPage {
     }
 
     this.djangoApi.login(this.nombre, this.password).subscribe(
-      (response: any[]) => {
+      (response: any) => {
+        localStorage.setItem('token', JSON.stringify(response))
+        const tokens = JSON.parse(localStorage.getItem('token') || '')
         const navigationExtras: NavigationExtras = {
           state: {
             nombre: this.nombre
           }
         };
         this.router.navigate(['/home'], navigationExtras);
+      }, (error: any) => {
+        this.password = ''
+        this.nombre = ''
+        alert('Correo o contrasena incorrecta')
       }
     );
   }
