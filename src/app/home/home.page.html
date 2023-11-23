@@ -16,27 +16,57 @@
 </p>
 
 <div class="container">
+
 <ion-card>
   <h1>Bienvenido, {{ user.nombre }} </h1>
-  <ion-card-header>
-    <ion-card-title> Solicita un viaje</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-      
-        <mat-label><mat-icon> my_location </mat-icon> Punto de partida</mat-label>
-        <input matInput placeholder="" value="">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label><mat-icon> near_me</mat-icon> Destino</mat-label>
-        <input matInput placeholder="" value="">
-      </mat-form-field>
 
-      
-      <ion-button type="submit" expand="block" [routerLink]="['/home']">Buscar</ion-button>
-    </form>
-  </ion-card-content>
+  <!-- CONDUCTOR -->
+  <div *ngIf=" user.is_conductor; ">
+
+  <form [formGroup]="vehiculoForm" (ngSubmit)="submitVehiculoForm()">
+    <ion-item>
+      <ion-label>Patente</ion-label>
+      <ion-input formControlName="patente"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Marca</ion-label>
+      <ion-input formControlName="marca"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Modelo</ion-label>
+      <ion-input formControlName="modelo"></ion-input>
+    </ion-item>
+    <ion-button type="submit" [disabled]="!vehiculoForm.valid">Enviar</ion-button>
+  </form>
+
+</div>
+
+
+
+  <!-- PASAJERO -->
+  <div *ngIf=" !user.is_conductor; ">
+    <ion-card-header>
+      <ion-card-title> Solicita un viaje</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+        
+          <mat-label><mat-icon> my_location </mat-icon> Punto de partida</mat-label>
+          <input matInput placeholder="" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label><mat-icon> near_me</mat-icon> Destino</mat-label>
+          <input matInput placeholder="" value="">
+        </mat-form-field>
+
+        
+        <ion-button type="submit" expand="block" [routerLink]="['/home']">Buscar</ion-button>
+      </form>
+    </ion-card-content>
+  </div>
 </ion-card>
   <ion-buttons slot="start">
     <ion-back-button default-href="/"></ion-back-button>
