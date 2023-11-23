@@ -8,6 +8,7 @@ import { retry } from 'rxjs/internal/operators/retry';
 })
 export class DjangoService {
   apiURL = 'http://127.0.0.1:8000/api';
+  baseUrl: any;
   
   constructor(private http: HttpClient) { }
 
@@ -17,4 +18,10 @@ export class DjangoService {
     })
     .pipe(retry(3));
   }
-}
+
+
+  register(userDetails: any) {
+    return this.http.post(`${this.apiURL}/usuarios/`, userDetails);
+    }
+  }
+
