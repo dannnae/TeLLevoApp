@@ -8,9 +8,15 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'inicio',
     pathMatch: 'full'
   },
+
+  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -19,6 +25,12 @@ const routes: Routes = [
     path: 'password',
     loadChildren: () => import('./password/password.module').then( m => m.PasswordPageModule)
   },
+
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  
   {
     path: '**',
     loadChildren: () =>
@@ -26,6 +38,8 @@ const routes: Routes = [
         (m) => m.ErrorPagePageModule
       ),
   },
+
+
 ];
 
 @NgModule({
