@@ -1,0 +1,12 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+
+  .mat-card {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    /* Otros estilos para el mat-card */
+  }
