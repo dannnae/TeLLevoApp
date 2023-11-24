@@ -18,18 +18,15 @@
   <form (ngSubmit)="login()">
 
     <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="nombre" [(ngModel)]="nombre" name="nombre"></ion-input>
+      <ion-label position="floating">Ingrese su correo</ion-label>
+      <ion-input type="text" [(ngModel)]="nombre" name="nombre"></ion-input>
     </ion-item>
-
+    
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
     </ion-item>
     
-    
-    <div class="error-message" *ngIf="password && password.length < 4">La contraseña debe tener al menos 4 caracteres</div>
-    <div class="error-message" *ngIf="nombre && nombre.length < 4">El nombre debe tener al menos 4 caracteres</div>
     <ion-button type="submit" expand="block">Iniciar sesión</ion-button>
       <div style="height: 40px;"></div>
         <div class="center-text">

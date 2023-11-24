@@ -41,7 +41,7 @@ export class LoginPage {
       }, (error: any) => {
         this.password = ''
         this.nombre = ''
-        alert('Correo o contrasena incorrecta')
+        console.error('error:', error);
       }
     );
   }
