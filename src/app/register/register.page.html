@@ -4,9 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<div class="center-container">
-<mat-card>
-<mat-card-content>
+<ion-content>
   <form (ngSubmit)="onRegister()">
     <ion-item>
       <ion-label position="floating">Nombre de usuario</ion-label>
@@ -19,10 +17,35 @@
     </ion-item>
 
     <ion-item>
+      <ion-label position="floating">Tipo de usuario</ion-label>
+      <ion-select [(ngModel)]="userData.es_conductor" name="es_conductor">
+        <ion-select-option [value]="false">Pasajero</ion-select-option>
+        <ion-select-option [value]="true">Conductor</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ng-container *ngIf="userData.es_conductor">
+      <ion-item>
+        <ion-label position="floating">Patente</ion-label>
+        <ion-input type="text" name="patente" [(ngModel)]="userData.vehiculo.patente"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Marca</ion-label>
+        <ion-input type="text" name="marca" [(ngModel)]="userData.vehiculo.marca"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Modelo</ion-label>
+        <ion-input type="text" name="modelo" [(ngModel)]="userData.vehiculo.modelo"></ion-input>
+      </ion-item>
+    </ng-container>
+
+    <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="password" name="password" [(ngModel)]="userData.password"></ion-input>
     </ion-item>
-
+    
     <ion-item>
       <ion-label position="floating">Confirmar Contraseña</ion-label>
       <ion-input type="password" name="confirmPassword" [(ngModel)]="confirmPassword"></ion-input>
@@ -30,8 +53,4 @@
 
     <ion-button expand="block" type="submit">Registrarse</ion-button>
   </form>
-  <p>Ya tienes cuenta?</p>
-  <a [routerLink]="['/login']" class="small-text">Inicia sesion</a>
-</mat-card-content>
-</mat-card>
-</div>
+</ion-content>
