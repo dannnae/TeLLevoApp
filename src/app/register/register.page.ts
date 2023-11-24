@@ -11,10 +11,13 @@ export class RegisterPage {
   userData = {
     email: '',
     nombre: '',
-    telefono: '',
-    direccion: '',
     password: '',
-    
+    es_conductor: false, 
+    vehiculo: { 
+      patente: '',
+      marca: '',
+      modelo: ''
+    }
   };
   confirmPassword = '';
 
@@ -26,12 +29,19 @@ export class RegisterPage {
       return;
     }
 
+    if (this.userData.es_conductor) {
+      if (!this.userData.vehiculo.patente || !this.userData.vehiculo.marca || !this.userData.vehiculo.modelo) {
+        console.log('Por favor, complete los datos del vehículo');
+        return;
+      }
+    }
     this.djangoApi.register(this.userData)
       .subscribe((response: any) => {
         this.router.navigate(['/login']);
         console.log('Registro exitoso:', response);
       }, (error: any) => {
         console.error('Error en el registro:', error);
+        console.log(this.userData)
       });
   }
 }
