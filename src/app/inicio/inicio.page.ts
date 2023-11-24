@@ -13,5 +13,8 @@ export class InicioPage{
   irARegistro() {
     this.router.navigate(['/register']); 
   }
+  irALogin() {
+    this.router.navigate(['/login']); 
+  }
 }
 
