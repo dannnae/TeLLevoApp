@@ -13,11 +13,9 @@ export class RegisterPage {
     nombre: '',
     password: '',
     es_conductor: false, 
-    vehiculo: { 
-      patente: '',
-      marca: '',
-      modelo: ''
-    }
+    patente: '',
+    marca: '',
+    modelo: ''
   };
   confirmPassword = '';
 
@@ -30,7 +28,7 @@ export class RegisterPage {
     }
 
     if (this.userData.es_conductor) {
-      if (!this.userData.vehiculo.patente || !this.userData.vehiculo.marca || !this.userData.vehiculo.modelo) {
+      if (!this.userData.patente || !this.userData.marca || !this.userData.modelo) {
         console.log('Por favor, complete los datos del vehículo');
         return;
       }
