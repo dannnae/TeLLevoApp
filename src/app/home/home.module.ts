@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-import { ViajesFormComponent } from '../components/viajes-form/viajes-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +12,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomePageRoutingModule } from './home-routing.module';
 import {MatMenuModule} from '@angular/material/menu';
+import { ViajesFormComponent } from '../components/viajes-form/viajes-form.component';
+import { ViajesListComponent } from '../components/viajes-list/viajes-list.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
+    MatTableModule
   ],
-  declarations: [HomePage, ViajesFormComponent]
+  declarations: [HomePage, ViajesFormComponent, ViajesListComponent]
 })
 export class HomePageModule {}
