@@ -1,40 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router, NavigationExtras } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DjangoService } from '../services/django.service';
+
+
+declare var google: any;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   user: any = {};
-  vehiculoForm!: FormGroup;
+  @ViewChild('mapContainer', { static: false, read: ElementRef }) mapContainer!: ElementRef | undefined;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.vehiculoForm = this.formBuilder.group({
-      patente: ['', Validators.required],
-      marca: ['', Validators.required],
-      modelo: ['', Validators.required],
-    });
-
     const userData = this.router.getCurrentNavigation()?.extras.state;
-  
+
     if (userData) {
       this.user = { ...userData };
     }
   }
 
-  submitVehiculoForm() {
-    if (this.vehiculoForm.valid) {
-      const formData = this.vehiculoForm.value;
+  ngAfterViewInit() {
+    if (this.mapContainer) {
+      this.initMap();
+    }
+  }
+
+  initMap() {
+    const mapElement = this.mapContainer?.nativeElement;
+    if (mapElement) {
+      const map = new google.maps.Map(mapElement, {
+        center: { lat: -33.43291633792561, lng: -70.61487221648964 },
+        zoom: 20,
+      });
+      const marker = new google.maps.Marker({
+        position: { lat: -33.43291633792561, lng: -70.61487221648964 },
+        map: map,
+        title: 'ubicación inicial',
+      });
     }
   }
 }
