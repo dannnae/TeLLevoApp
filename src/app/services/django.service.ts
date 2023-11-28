@@ -26,7 +26,12 @@ export class DjangoService {
     return this.http.post(`${this.apiURL}/viajes/`, viajeData)
     
   }
+
+  listarViajes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiURL}/viajes/`);
+  }
 }
+
 
 
 
