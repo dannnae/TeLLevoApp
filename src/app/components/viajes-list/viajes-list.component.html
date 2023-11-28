@@ -1,0 +1,14 @@
+<div *ngIf="viajes.length > 0">
+  <h2>Viajes disponibles</h2>
+  <div class="inner-scroll">
+    <ul>
+      <li *ngFor="let viaje of viajes">
+        Conductor: {{ viaje.nombre_conductor}}
+        Origen: {{ viaje.origen }}, Hora de salida: {{ viaje.fecha_hora_inicio }}, tarifa: {{ viaje.tarifa}}
+      </li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="viajes.length === 0">
+  <p>no hay viajes</p>
+</div>
