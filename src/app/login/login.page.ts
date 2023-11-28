@@ -34,7 +34,8 @@ export class LoginPage {
         const navigationExtras: NavigationExtras = {
           state: {
             nombre: this.nombre,
-            is_conductor: decodedAccessToken.is_conductor
+            is_conductor: decodedAccessToken.is_conductor,
+            idConductor: decodedAccessToken.user_id,
           }
         };
         this.router.navigate(['/home'], navigationExtras);
