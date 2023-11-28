@@ -33,6 +33,7 @@ export class RegisterPage {
         return;
       }
     }
+    
     this.djangoApi.register(this.userData)
       .subscribe((response: any) => {
         this.router.navigate(['/login']);

@@ -1,69 +1,51 @@
-
 <p>
   <mat-toolbar>
-   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>TeLlevoApp</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-   <mat-icon>share</mat-icon>
- </button>
-</mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>TeLlevoApp</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
 </p>
-
 <div class="container">
-
-<ion-card>
-  <h1>Bienvenido, {{ user.nombre }} </h1>
-
-  <!-- PASAJERO -->
-  <div *ngIf=" !user.is_conductor; ">
-
-    <ion-card-header>
-      <ion-card-title> Seleccione el viaje: </ion-card-title>
-    </ion-card-header>
-    <ion-list>
-      <ion-item>
-        <ion-label>Conductor: Juan Perez</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Conductor: Camilo Macias</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Conductor: Alonso Villanueva</ion-label>
-      </ion-item>
-    </ion-list>
-
-</div>
-
-
-
-  <!-- CONDUCTOR -->
-  <div *ngIf=" user.is_conductor; ">
-    <ion-card-header>
-      <ion-card-title> Planea tu Viaje</ion-card-title>
-    </ion-card-header>
+  <h1>Bienvenido, {{ user.nombre }}</h1>
+  <!-- <div #mapContainer class="map-container"></div> -->
+  <ion-card>
     <ion-card-content>
-      <form class="example-form">
-        <mat-form-field class="example-full-width">
+      <!-- PASAJERO -->
+      <div *ngIf="!user.is_conductor;">
         
-          <mat-label><mat-icon> my_location </mat-icon> Punto de partida</mat-label>
-          <input matInput placeholder="" value="">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label><mat-icon> near_me</mat-icon> Destino</mat-label>
-          <input matInput placeholder="" value="">
-        </mat-form-field>
-
-        
-        <ion-button type="submit" expand="block" [routerLink]="['/home']">Buscar</ion-button>
-      </form>
+      </div>
+      
+      <!-- CONDUCTOR -->
+      <div *ngIf="user.is_conductor;">
+        <app-viajes-form [idConductor]="user.idConductor"></app-viajes-form>
+      </div>
     </ion-card-content>
-  </div>
-</ion-card>
-</div>
+  </ion-card>
 
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom" mode="ios">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="explorar" >
+        <ion-icon name="map-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="passenger" >
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="perfil">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  <ion-tabs>
+  </ion-tabs> -->
+</div>
