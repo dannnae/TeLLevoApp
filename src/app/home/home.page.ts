@@ -13,6 +13,8 @@ declare var google: any;
 })
 export class HomePage implements OnInit, AfterViewInit {
   user: any = {};
+  map: any;
+  marker: any;
   @ViewChild('mapContainer', { static: false, read: ElementRef }) mapContainer!: ElementRef | undefined;
 
   constructor(
@@ -21,7 +23,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     const userData = this.router.getCurrentNavigation()?.extras.state;
-
+    console.log(userData)
     if (userData) {
       this.user = { ...userData };
     }
@@ -36,15 +38,33 @@ export class HomePage implements OnInit, AfterViewInit {
   initMap() {
     const mapElement = this.mapContainer?.nativeElement;
     if (mapElement) {
-      const map = new google.maps.Map(mapElement, {
+      this.map = new google.maps.Map(mapElement, {
         center: { lat: -33.43291633792561, lng: -70.61487221648964 },
         zoom: 20,
       });
-      const marker = new google.maps.Marker({
-        position: { lat: -33.43291633792561, lng: -70.61487221648964 },
-        map: map,
-        title: 'ubicación inicial',
-      });
     }
   }
+
+  putMarker(viajeSeleccionado: any) {
+    if (this.marker) {
+      this.marker.setMap(null);
+    }
+    this.marker = new google.maps.Marker({
+      position: { lat: viajeSeleccionado.latitud, lng: viajeSeleccionado.longitud },
+      map: this.map,
+      title: viajeSeleccionado.origen,
+    });
+    this.map.panTo({ lat: viajeSeleccionado.latitud, lng: viajeSeleccionado.longitud })
+  }
+
+  openPerfil() {
+    this.router.navigate(['/perfil'], { state: this.user });
+    
+  }
+  
+  logout() {
+    
+  }
 }
+
+
