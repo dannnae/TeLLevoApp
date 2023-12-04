@@ -11,7 +11,11 @@ const routes: Routes = [
     redirectTo: 'inicio',
     pathMatch: 'full'
   },
-
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  
   {
     path: 'inicio',
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
@@ -38,6 +42,7 @@ const routes: Routes = [
         (m) => m.ErrorPagePageModule
       ),
   },
+
 
 
 ];
