@@ -1,6 +1,7 @@
-
   <form [formGroup]="viajeForm" (ngSubmit)="crearViaje()">
     <ion-list>
+
+      <!-- Ingresar direccion existente con api google -->
       <ion-item>
         <ion-input label="Origen" formControlName="origen" type="text" required></ion-input>
       </ion-item>

@@ -1,26 +1,20 @@
-<p>
-  <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>TeLlevoApp</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
-  </mat-toolbar>
-</p>
+
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openPerfil()">Perfil</button>
+  <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+</mat-menu>
+
+
+<div #mapContainer class="map-container"></div>
 <div class="container">
-  <h1>Bienvenido, {{ user.nombre }}</h1>
-  <!-- <div #mapContainer class="map-container"></div> -->
-  <ion-card>
+  <ion-card class="bottom-card">
     <ion-card-content>
       <!-- PASAJERO -->
       <div *ngIf="!user.is_conductor;">
-        <app-viajes-list></app-viajes-list>
+        <app-viajes-list (viajeSeleccionadoEmitter)="putMarker($event)"></app-viajes-list>
       </div>
       
       <!-- CONDUCTOR -->
@@ -30,21 +24,5 @@
     </ion-card-content>
   </ion-card>
 </div>
-<ion-tabs>
-  <ion-tab-bar slot="bottom" mode="ios">
-    <ion-tab-button tab="home">
-      <ion-icon name="home-outline"></ion-icon>
-    </ion-tab-button>
-    <ion-tab-button tab="explorar" >
-      <ion-icon name="map-outline"></ion-icon>
-    </ion-tab-button>
-    <ion-tab-button tab="passenger" >
-      <ion-icon name="search-outline"></ion-icon>
-    </ion-tab-button>
-    <ion-tab-button tab="perfil">
-      <ion-icon name="person-outline"></ion-icon>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-<ion-tabs>
-</ion-tabs>
+
+

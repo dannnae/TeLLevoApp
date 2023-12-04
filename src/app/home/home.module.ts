@@ -12,9 +12,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomePageRoutingModule } from './home-routing.module';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 import { ViajesFormComponent } from '../components/viajes-form/viajes-form.component';
 import { ViajesListComponent } from '../components/viajes-list/viajes-list.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
   imports: [
@@ -31,7 +36,13 @@ import {MatTableModule} from '@angular/material/table';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule, 
+    FormsModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatSidenavModule,
+    
   ],
   declarations: [HomePage, ViajesFormComponent, ViajesListComponent]
 })

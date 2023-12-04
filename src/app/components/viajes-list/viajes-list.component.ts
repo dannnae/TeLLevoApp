@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { DjangoService } from 'src/app/services/django.service';
 
 @Component({
@@ -7,7 +7,9 @@ import { DjangoService } from 'src/app/services/django.service';
   styleUrls: ['./viajes-list.component.scss'],
 })
 export class ViajesListComponent implements OnInit {
-  viajes: any[] = []; 
+  @Output() viajeSeleccionadoEmitter = new EventEmitter();
+  viajes: any[] = [];
+  viajeSeleccionado: any;
 
   constructor(private djangoApi: DjangoService) {}
 
@@ -19,11 +21,25 @@ export class ViajesListComponent implements OnInit {
     this.djangoApi.listarViajes().subscribe(
       (viajes: any[]) => {
         this.viajes = viajes;
-        console.log('Lista de viajes:', this.viajes);
+        console.log('lista de viajes:', this.viajes);
       },
       (error: any) => {
-        console.error('Error al obtener la lista de viajes:', error);
+        console.error('error al obtener la lista de viajes:', error);
       }
     );
   }
+
+  onViajeSeleccionado() {
+    this.viajeSeleccionadoEmitter.emit(this.viajes[this.viajeSeleccionado]);
+  }
+
+  seleccionarViaje(index: number) {
+    this.viajeSeleccionado = this.viajes[index];
+  }
+
+  elegirViaje(index: number) {
+    this.seleccionarViaje(index);
+  }
 }
+
+
