@@ -1,14 +1,17 @@
-<div *ngIf="viajes.length > 0">
-  <h2>Viajes disponibles</h2>
-  <div class="inner-scroll">
-    <ul>
-      <li *ngFor="let viaje of viajes">
-        Conductor: {{ viaje.nombre_conductor}}
-        Origen: {{ viaje.origen }}, Hora de salida: {{ viaje.fecha_hora_inicio }}, tarifa: {{ viaje.tarifa}}
-      </li>
-    </ul>
-  </div>
-</div>
-<div *ngIf="viajes.length === 0">
-  <p>no hay viajes</p>
+<label id="example-radio-group-label">Selecciona un viaje:</label>
+<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="viajeSeleccionado" (ngModelChange)="onViajeSeleccionado()">
+  <mat-radio-button class="example-radio-button" *ngFor="let viaje of viajes; let i = index" [value]="i">
+    Conductor: {{ viaje.nombre_conductor }}, Origen: {{ viaje.origen }}, Fecha y hora de salida: {{ viaje.hora_formateada }}
+    <mat-divider></mat-divider>
+  </mat-radio-button>
+</mat-radio-group>
+<div>eleccion:
+  <ng-container *ngIf="viajes.length > 0; else noViajes"> 
+
+    {{viajeSeleccionado}}
+    
+  </ng-container>
+  <ng-template #noViajes>
+    no hay viajes disponibles
+  </ng-template>
 </div>
