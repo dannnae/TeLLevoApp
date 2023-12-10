@@ -27,10 +27,20 @@ export class DjangoService {
     
   }
 
-  listarViajes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiURL}/viajes/`);
+  listarViajes(pasajeroId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiURL}/viajes/?pasajero=${pasajeroId}`);
+  }
+
+  obtenerDatos(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}/usuarios/${userId}/`);
+  }
+
+  agregarPasajero(pasajeroId: number, viajeId: number): Observable<any> {
+    return this.http.put(`${this.apiURL}/viajes/${viajeId}/agregar_pasajero/`, { pasajero_nuevo: pasajeroId })
+      .pipe(retry(2));
   }
 }
+
 
 
 

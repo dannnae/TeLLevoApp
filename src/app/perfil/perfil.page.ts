@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { DjangoService } from '../services/django.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -8,10 +8,30 @@ import { DjangoService } from '../services/django.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  user: any;
+  datos: any;
+  userId: number = 0;
 
-  constructor() {}
+  constructor(private djangoApi: DjangoService,  private router: Router) {}
 
   ngOnInit() {
+    const userData = this.router.getCurrentNavigation()?.extras.state;
+    if (userData) {
+      this.userId = userData['idConductor'];
+    }
+    this.listarDatos();
+  }
+
+  listarDatos() {
+    this.djangoApi.obtenerDatos(this.userId).subscribe(
+      (datos: any) => {
+        this.datos = datos;
+        console.log('Perfil:', this.datos);
+      },
+      (error: any) => {
+        console.error('error:', error);
+      }
+    );
   }
 }
+
+

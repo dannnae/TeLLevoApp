@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { DjangoService } from 'src/app/services/django.service';
 
 @Component({
@@ -8,8 +8,10 @@ import { DjangoService } from 'src/app/services/django.service';
 })
 export class ViajesListComponent implements OnInit {
   @Output() viajeSeleccionadoEmitter = new EventEmitter();
+  @Input() idPasajero: any;
   viajes: any[] = [];
   viajeSeleccionado: any;
+  disabledButton: boolean = true;
 
   constructor(private djangoApi: DjangoService) {}
 
@@ -18,7 +20,7 @@ export class ViajesListComponent implements OnInit {
   }
 
   listarViajes() {
-    this.djangoApi.listarViajes().subscribe(
+    this.djangoApi.listarViajes(this.idPasajero).subscribe(
       (viajes: any[]) => {
         this.viajes = viajes;
         console.log('lista de viajes:', this.viajes);
@@ -30,16 +32,24 @@ export class ViajesListComponent implements OnInit {
   }
 
   onViajeSeleccionado() {
+    this.disabledButton = false;
     this.viajeSeleccionadoEmitter.emit(this.viajes[this.viajeSeleccionado]);
   }
 
-  seleccionarViaje(index: number) {
-    this.viajeSeleccionado = this.viajes[index];
+  elegirViaje() {
+    const viajeId = this.viajes[this.viajeSeleccionado].id
+    this.djangoApi.agregarPasajero(this.idPasajero, viajeId).subscribe(
+      (datos: any) => {
+        this.viajes = this.viajes.filter(({ id }) => id !== viajeId)
+        alert('Viaje reservado con exito!')
+      },
+      (error: any) => {
+        alert(error.error);
+      }
+    )
   }
-
-  elegirViaje(index: number) {
-    this.seleccionarViaje(index);
-  }
+  
+  
 }
 
 
