@@ -1,15 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <div>
-      </div>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<div *ngIf="datos">
+  <h1>Perfil de Usuario</h1>
+  <p>Nombre: {{ datos.nombre }} </p>
+  <p>Email: {{ datos.email }}</p>
+  <p>Teléfono: {{ datos.telefono }}</p>
+</div>
+<div *ngIf="!datos">
+  <p>No se encontraron datos de perfil</p>
+</div>
