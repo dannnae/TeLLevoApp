@@ -1,24 +1,19 @@
-  <form [formGroup]="viajeForm" (ngSubmit)="crearViaje()">
-    <ion-list>
+<form [formGroup]="viajeForm" (ngSubmit)="crearViaje()">
+  <ion-list>
 
-      <!-- Ingresar direccion existente con api google -->
-      <ion-item>
-        <ion-input label="Origen" formControlName="origen" type="text" required></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-input #addressInput label="Origen" formControlName="origen" type="text" required></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-input label="Destino" formControlName="destino" type="text" required></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Fecha y hora de salida</ion-label>
+      <ion-datetime formControlName="fechaHoraSalida"></ion-datetime>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Fecha y hora de salida</ion-label>
-        <ion-datetime formControlName="fechaHoraSalida"></ion-datetime>
-      </ion-item>
+    <ion-item>
+      <ion-input label="Costo por persona" formControlName="costoPorPersona" type="number" required></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-input label="Costo por persona" formControlName="costoPorPersona" type="number" required></ion-input>
-      </ion-item>
-
-      <ion-button type="submit" expand="block">Crear Viaje</ion-button>
-    </ion-list>
-  </form>
+    <ion-button type="submit" expand="block">Crear Viaje</ion-button>
+  </ion-list>
+</form>
