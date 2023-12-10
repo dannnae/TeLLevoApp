@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DjangoService } from '../services/django.service';
-
+import { Router } from '@angular/router';
 
 declare var google: any;
 
@@ -59,11 +56,11 @@ export class HomePage implements OnInit, AfterViewInit {
 
   openPerfil() {
     this.router.navigate(['/perfil'], { state: this.user });
-    
   }
   
   logout() {
-    
+    localStorage.removeItem('token')
+    this.router.navigate(['/inicio'])
   }
 }
 

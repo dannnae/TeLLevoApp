@@ -14,12 +14,12 @@
     <ion-card-content>
       <!-- PASAJERO -->
       <div *ngIf="!user.is_conductor;">
-        <app-viajes-list (viajeSeleccionadoEmitter)="putMarker($event)"></app-viajes-list>
+        <app-viajes-list [idPasajero]="user.idConductor" (viajeSeleccionadoEmitter)="putMarker($event)"></app-viajes-list>
       </div>
       
       <!-- CONDUCTOR -->
       <div *ngIf="user.is_conductor;">
-        <app-viajes-form [idConductor]="user.idConductor"></app-viajes-form>
+        <app-viajes-form [idConductor]="user.idConductor" [map]="map"></app-viajes-form>
       </div>
     </ion-card-content>
   </ion-card>
