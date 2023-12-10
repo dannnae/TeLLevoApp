@@ -1,17 +1,17 @@
 <label id="example-radio-group-label">Selecciona un viaje:</label>
 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="viajeSeleccionado" (ngModelChange)="onViajeSeleccionado()">
   <mat-radio-button class="example-radio-button" *ngFor="let viaje of viajes; let i = index" [value]="i">
-    Conductor: {{ viaje.nombre_conductor }}, Origen: {{ viaje.origen }}, Fecha y hora de salida: {{ viaje.hora_formateada }}
+    Conductor: {{ viaje.nombre_conductor }}, Origen: {{ viaje.origen }}, Fecha y hora de salida: {{ viaje.hora_formateada }}, 
+    Tarifa: {{ viaje.tarifa }}
     <mat-divider></mat-divider>
   </mat-radio-button>
 </mat-radio-group>
-<div>eleccion:
-  <ng-container *ngIf="viajes.length > 0; else noViajes"> 
 
-    {{viajeSeleccionado}}
-    
+<div>
+  <ng-container *ngIf="viajes.length > 0; else noViajes"> 
+    <button mat-flat-button color="accent" (click)="elegirViaje()" disabled="{{disabledButton}}">Reservar</button> 
   </ng-container>
   <ng-template #noViajes>
-    no hay viajes disponibles
+    No hay viajes disponibles
   </ng-template>
 </div>
