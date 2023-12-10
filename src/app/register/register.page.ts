@@ -22,16 +22,14 @@ export class RegisterPage {
   constructor(private router: Router, private djangoApi: DjangoService) {}
 
   onRegister() {
-    if (this.userData.password !== this.confirmPassword) {
-      console.log('Las contraseñas no coinciden');
-      return;
-    }
+    const regex = new RegExp(/^[a-zA-Z.]+@duocuc.cl$/);
+
+    if (!regex.test(this.userData.email)) return;
+
+    if (this.userData.password !== this.confirmPassword) return;
 
     if (this.userData.es_conductor) {
-      if (!this.userData.patente || !this.userData.marca || !this.userData.modelo) {
-        console.log('Por favor, complete los datos del vehículo');
-        return;
-      }
+      if (!this.userData.patente || !this.userData.marca || !this.userData.modelo) return;
     }
     
     this.djangoApi.register(this.userData)
