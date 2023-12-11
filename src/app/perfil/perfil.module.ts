@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PerfilConductorComponent } from '../components/perfil-conductor/perfil-conductor.component';
-import { PerfilPasajeroComponent } from '../components/perfil-pasajero/perfil-pasajero.component';
 import { IonicModule } from '@ionic/angular';
 import { PerfilPageRoutingModule } from './perfil-routing.module';
 import { PerfilPage } from './perfil.page';
@@ -14,6 +12,6 @@ import { PerfilPage } from './perfil.page';
     IonicModule,
     PerfilPageRoutingModule
   ],
-  declarations: [PerfilPage, PerfilConductorComponent, PerfilPasajeroComponent]
+  declarations: [PerfilPage]
 })
 export class PerfilPageModule {}
