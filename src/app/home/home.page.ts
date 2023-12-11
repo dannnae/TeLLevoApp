@@ -14,9 +14,7 @@ export class HomePage implements OnInit, AfterViewInit {
   marker: any;
   @ViewChild('mapContainer', { static: false, read: ElementRef }) mapContainer!: ElementRef | undefined;
 
-  constructor(
-    private router: Router,
-  ) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     const userData = this.router.getCurrentNavigation()?.extras.state;
@@ -51,17 +49,16 @@ export class HomePage implements OnInit, AfterViewInit {
       map: this.map,
       title: viajeSeleccionado.origen,
     });
-    this.map.panTo({ lat: viajeSeleccionado.latitud, lng: viajeSeleccionado.longitud })
+    this.map.panTo({ lat: viajeSeleccionado.latitud, lng: viajeSeleccionado.longitud });
   }
 
   openPerfil() {
     this.router.navigate(['/perfil'], { state: this.user });
   }
-  
+
   logout() {
-    localStorage.removeItem('token')
-    this.router.navigate(['/inicio'])
+    localStorage.removeItem('token');
+    this.router.navigate(['/inicio']);
   }
 }
-
 
