@@ -40,11 +40,11 @@ export class LoginPage {
         };
         this.router.navigate(['/home'], navigationExtras);
       }, (error: any) => {
-        this.password = ''
-        this.nombre = ''
         console.error('error:', error);
       }
     );
+    this.password = ''
+    this.nombre = ''
   }
 }
 
