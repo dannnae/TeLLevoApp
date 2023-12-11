@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges, SimpleChang
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DjangoService } from 'src/app/services/django.service';
+import { Geolocation, Position} from '@capacitor/geolocation';
 
 declare var google: any;
 
@@ -23,7 +24,7 @@ export class ViajesFormComponent  implements OnInit, OnChanges {
   ngOnInit() {
     this.viajeForm = this.formBuilder.group({
       origen: ['', Validators.required],
-      fechaHoraSalida: ['', Validators.required],
+      fechaHoraSalida: [null, Validators.required],
       costoPorPersona: ['', Validators.required],
     });
   }
@@ -31,7 +32,49 @@ export class ViajesFormComponent  implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['map'] && this.map) {
       this.initializeSearchBox();
+      this.obtenerUbicacionActual();
     }
+  }
+
+  async obtenerUbicacionActual() {
+    try {
+      const posicion = await Geolocation.getCurrentPosition();
+      const latitud = posicion.coords.latitude;
+      const longitud = posicion.coords.longitude;
+      this.putMarker({ latitud, longitud })
+
+    } catch (error) {
+      console.error('Error al obtener la ubicación:', error);
+    }
+  }
+
+  putMarker(viajeSeleccionado: any) {
+    this.markers.forEach((marker) => {
+      marker.setMap(null);
+    });
+    this.markers = [];
+    const coords = { lat: viajeSeleccionado.latitud, lng: viajeSeleccionado.longitud }
+
+    const geocoder = new google.maps.Geocoder();
+    geocoder
+      .geocode({ location: coords })
+      .then((response: any) => {
+        if (response.results[0]) {
+          const marker = new google.maps.Marker({
+            position: coords,
+            map: this.map,
+            title: response.results[0].formatted_address
+          });
+          this.markers.push(marker);
+          this.map.panTo(coords);
+          
+          this.addressInput.nativeElement.value = response.results[0].formatted_address
+          this.viajeForm.get('origen')?.setValue(response.results[0].formatted_address)
+        } else {
+          window.alert("No results found");
+        }
+      })
+      .catch((e: any) => window.alert("Geocoder failed due to: " + e))
   }
 
   initializeSearchBox() {
@@ -93,21 +136,27 @@ export class ViajesFormComponent  implements OnInit, OnChanges {
   }
 
   crearViaje() {
-    console.log(this.markers)
+    if (this.markers.length == 0) return;
     if (this.viajeForm.valid) {
-      const viajeData = { ...this.viajeForm.value, tarifa: this.viajeForm.value.costoPorPersona, conductor: this.idConductor, 
-        fecha_hora_inicio: this.viajeForm.value.fechaHoraSalida};
+      const viajeData = { 
+        ...this.viajeForm.value, 
+        tarifa: this.viajeForm.value.costoPorPersona, 
+        conductor: this.idConductor, 
+        fecha_hora_inicio: this.viajeForm.value.fechaHoraSalida,
+        latitud: this.markers[0].position.lat(),
+        longitud: this.markers[0].position.lng(),
+      };
+
+      console.log(viajeData)
 
       this.djangoApi.crearViaje(viajeData).subscribe(
         (response) => {
-          console.log('viaje creado:', response);
+          alert('Viaje creado con exito!');
         },
         (error) => {
           console.error('error al crear el viaje:', error);
         }
       );
-    } else {
-      console.error('el formulario no es válido');
     }
   }
 }
