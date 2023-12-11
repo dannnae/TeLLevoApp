@@ -2,12 +2,18 @@
   <ion-list>
 
     <ion-item>
-      <ion-input #addressInput label="Origen" formControlName="origen" type="text" required></ion-input>
+      <ion-input #addressInput id="pac-input" label="Origen" formControlName="origen" type="text" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Fecha y hora de salida</ion-label>
-      <ion-datetime formControlName="fechaHoraSalida"></ion-datetime>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" formControlName="fechaHoraSalida"></ion-datetime>
+        </ng-template>
+      </ion-modal>
     </ion-item>
 
     <ion-item>
