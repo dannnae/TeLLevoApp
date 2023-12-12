@@ -151,7 +151,8 @@ export class ViajesFormComponent  implements OnInit, OnChanges {
 
       this.djangoApi.crearViaje(viajeData).subscribe(
         (response) => {
-          alert('Viaje creado con exito!');
+          alert('Viaje creado con exito!')
+          this.viajeForm.reset();
         },
         (error) => {
           console.error('error al crear el viaje:', error);
